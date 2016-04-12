@@ -8,30 +8,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import com.formation.data.AnimalsContract.Animals;
+import com.formation.data.AnimalContract.Animals;
 
-public class AnimalsContentProvider extends ContentProvider {
+public class AnimalProvider extends ContentProvider {
     long newRowId;
     SQLiteDatabase db;
-    AnimalsDbHelper dbHelper;
+    AnimalDbHelper dbHelper;
     Cursor result;
 
-    private static final String AUTHORITY = "com.formation.data";
-    private static final String BASE_PATH = "animals";
     private static final int ANIMALS_LIST = 0;
     private static final int ANIMAL_DETAILS = 1;
     private static final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        matcher.addURI(AUTHORITY, BASE_PATH, ANIMALS_LIST);
-        matcher.addURI(AUTHORITY, BASE_PATH + "/#", ANIMAL_DETAILS);
+        matcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME, ANIMALS_LIST);
+        matcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME + "/#", ANIMAL_DETAILS);
     }
 
-    public AnimalsContentProvider() {
+    public AnimalProvider() {
     }
 
     @Override
     public boolean onCreate() {
-        dbHelper = new AnimalsDbHelper(getContext());
+        dbHelper = new AnimalDbHelper(getContext());
         db = dbHelper.getWritableDatabase();
 
         db.beginTransaction();
@@ -44,7 +42,6 @@ public class AnimalsContentProvider extends ContentProvider {
         } finally {
             db.endTransaction(); // rollback
         }
-
         return false;
     }
 
@@ -76,12 +73,12 @@ public class AnimalsContentProvider extends ContentProvider {
         int uriType = matcher.match(uri);
         switch (uriType) {
             case ANIMALS_LIST: {
-                result = dbHelper.getReadableDatabase().query(BASE_PATH, projection, selection, selectionArgs, null, null, sortOrder);
+                result = dbHelper.getReadableDatabase().query(Animals.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             }
             case ANIMAL_DETAILS: {
                 String[] id = { uri.getLastPathSegment() };
-                result = dbHelper.getReadableDatabase().query(BASE_PATH, projection, "_ID = ?", id, null, null, sortOrder);
+                result = dbHelper.getReadableDatabase().query(Animals.TABLE_NAME, projection, "_ID = ?", id, null, null, sortOrder);
                 break;
             }
             default: {

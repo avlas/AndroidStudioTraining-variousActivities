@@ -77,8 +77,17 @@
                 android:value="com.formation.activities.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".AnimalDetailActivity"
+            android:label="@string/title_activity_animal_detail"
+            android:parentActivityName=".AnimalsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.formation.activities.AnimalsActivity" />
+        </activity>
+
         <provider
-            android:name="com.formation.data.AnimalsContentProvider"
+            android:name="com.formation.data.AnimalProvider"
             android:authorities="com.formation.data"
             android:enabled="true"
             android:exported="true" />

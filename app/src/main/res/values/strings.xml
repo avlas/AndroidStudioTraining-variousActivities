@@ -30,12 +30,15 @@
     <string name="title_activity_users">Users</string>
 
     <!-- UserDetailActivity -->
-    <string name="title_activity_user_detail">User Detail</string>
+    <string name="title_activity_user_detail">User detail</string>
 
     <!-- ContactsActivity -->
     <string name="title_activity_contacts">Contacts</string>
 
     <!-- AnimalsActivity -->
     <string name="title_activity_animals">Animals</string>
+
+    <!-- AnimalDetailActivity -->
+    <string name="title_activity_animal_detail">Animal detail</string>
 
 </resources>
