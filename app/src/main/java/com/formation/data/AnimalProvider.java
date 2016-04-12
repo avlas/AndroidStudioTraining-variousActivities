@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import com.formation.data.AnimalContract.Animals;
 
 public class AnimalProvider extends ContentProvider {
-    long newRowId;
     SQLiteDatabase db;
     AnimalDbHelper dbHelper;
     Cursor result;
@@ -32,12 +31,13 @@ public class AnimalProvider extends ContentProvider {
         dbHelper = new AnimalDbHelper(getContext());
         db = dbHelper.getWritableDatabase();
 
+        ContentValues lion = buildLion();
+        ContentValues giraffe = buildGiraffe();
+
         db.beginTransaction();
         try {
-            ContentValues lion = buildLion();
-            ContentValues giraffe = buildGiraffe();
-            newRowId = db.insert(Animals.TABLE_NAME, null, lion);
-            newRowId = db.insert(Animals.TABLE_NAME, null, giraffe);
+            db.insert(Animals.TABLE_NAME, null, lion);
+            db.insert(Animals.TABLE_NAME, null, giraffe);
             db.setTransactionSuccessful(); // commit
         } finally {
             db.endTransaction(); // rollback
