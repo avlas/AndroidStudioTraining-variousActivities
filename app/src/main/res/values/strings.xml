@@ -7,12 +7,13 @@
     <string name="action_settings">Settings</string>
 
     <!-- MainActivity -->
-    <string name="app_name">Various Activities</string>
+    <string name="app_name">Various Activities With Fragments</string>
     <string name="hello_world">Hello world!</string>
     <string name="mirror_text">MirrorText</string>
     <string name="form">Form</string>
     <string name="users">Users</string>
     <string name="contacts">Contacts</string>
+    <string name="animals">Animals</string>
 
     <!-- MirrorTextActivity -->
     <string name="title_activity_mirror_text">MirrorText</string>
@@ -33,5 +34,8 @@
 
     <!-- ContactsActivity -->
     <string name="title_activity_contacts">Contacts</string>
+
+    <!-- AnimalsActivity -->
+    <string name="title_activity_animals">Animals</string>
 
 </resources>

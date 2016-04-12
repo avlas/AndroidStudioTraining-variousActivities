@@ -50,6 +50,15 @@ public class MainActivity extends Activity {
 				startActivity(contactsActivity);
 			}
 		});
+
+		Button animalsBtn = (Button) findViewById(R.id.button_animals);
+		animalsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent animalsActivity = new Intent(MainActivity.this, AnimalsActivity.class);
+				startActivity(animalsActivity);
+			}
+		});
 	}
 
 	protected void onPause() {

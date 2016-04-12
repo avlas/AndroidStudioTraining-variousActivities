@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.formation.activities"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -12,14 +12,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +31,7 @@
         <activity
             android:name=".MirrorTextActivity"
             android:label="@string/title_activity_mirror_text"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.formation.activities.MainActivity" />
@@ -37,7 +39,7 @@
         <activity
             android:name=".FormActivity"
             android:label="@string/title_activity_form"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.formation.activities.MainActivity" />
@@ -45,7 +47,7 @@
         <activity
             android:name=".UsersActivity"
             android:label="@string/title_activity_users"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.formation.activities.MainActivity" />
@@ -53,7 +55,7 @@
         <activity
             android:name=".UserDetailActivity"
             android:label="@string/title_activity_user_detail"
-            android:parentActivityName=".UsersActivity" >
+            android:parentActivityName=".UsersActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.formation.activities.UsersActivity" />
@@ -61,11 +63,25 @@
         <activity
             android:name=".ContactsActivity"
             android:label="@string/title_activity_contacts"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.formation.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".AnimalsActivity"
+            android:label="@string/title_activity_animals"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.formation.activities.MainActivity" />
+        </activity>
+
+        <provider
+            android:name="com.formation.data.AnimalsContentProvider"
+            android:authorities="com.formation.data"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>
