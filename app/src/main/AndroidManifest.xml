@@ -11,8 +11,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -76,7 +75,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.formation.activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".AnimalDetailActivity"
             android:label="@string/title_activity_animal_detail"
@@ -86,11 +84,26 @@
                 android:value="com.formation.activities.AnimalsActivity" />
         </activity>
 
+        <activity
+            android:name=".PreferencesActivity"
+            android:label="@string/title_activity_preferences"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.formation.activities.MainActivity" />
+        </activity>
+
         <provider
             android:name="com.formation.data.AnimalProvider"
             android:authorities="com.formation.data"
             android:enabled="true"
             android:exported="true" />
+
+        <service
+            android:name=".AnimalIntentService"
+            android:exported="false">
+        </service>
+
     </application>
 
 </manifest>
