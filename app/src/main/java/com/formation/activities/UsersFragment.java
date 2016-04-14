@@ -62,7 +62,7 @@ public class UsersFragment extends Fragment {
 	}
 
 	public interface Callbacks {		
-		public void onItemClick(String id);		
+		void onItemClick(String id);
 	}
 
 	public void setActivateOnItemClick(boolean activateOnItemClick) {

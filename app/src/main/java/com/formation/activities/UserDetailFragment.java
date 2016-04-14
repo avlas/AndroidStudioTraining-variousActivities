@@ -20,6 +20,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ import android.widget.TextView;
 
 /**
  * A fragment representing a single User detail screen. This fragment is either
- * contained in a {@link UserListActivity} in two-pane mode (on tablets) or a
+ * contained in a {@link UsersActivity} in two-pane mode (on tablets) or a
  * {@link UserDetailActivity} on handsets.
  */
 public class UserDetailFragment extends Fragment {
@@ -108,6 +109,12 @@ public class UserDetailFragment extends Fragment {
 		});
 	}
 
+	private void storeInputChanges() {
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean("isActive", user.isActive());
+		editor.commit();
+	}
+
 	public void readExternLogoAfterStoragePermissionsVerification() {
 		if (ContextCompat.checkSelfPermission(getActivity(),
 				Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -131,17 +138,17 @@ public class UserDetailFragment extends Fragment {
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 		switch (requestCode) {
-		case REQUEST_EXTERNAL_STORAGE: {
-			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				if (user.isActive() == Boolean.TRUE) {
-					readExternLogo("active");
+			case REQUEST_EXTERNAL_STORAGE: {
+				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					if (user.isActive() == Boolean.TRUE) {
+						readExternLogo("active");
+					} else {
+						readExternLogo("inactive");
+					}
 				} else {
-					readExternLogo("inactive");
 				}
-			} else {
+				return;
 			}
-			return;
-		}
 		}
 	}
 
@@ -150,11 +157,11 @@ public class UserDetailFragment extends Fragment {
 		String photo = photoName + ".jpg";
 
 		File photoFile = new File(File.separator + "sdcard" + File.separator + dirName + File.separator + photo);
-		InputStream iStream;
+		InputStream inputStream;
 		try {
-			iStream = new BufferedInputStream(new FileInputStream(photoFile));
-			Bitmap bm = BitmapFactory.decodeStream(iStream);
-			iStream.close();
+			inputStream = new BufferedInputStream(new FileInputStream(photoFile));
+			Bitmap bm = BitmapFactory.decodeStream(inputStream);
+			inputStream.close();
 
 			ImageView sdcardLogo = (ImageView) view.findViewById(R.id.detail_extern_logo);
 			sdcardLogo.setImageBitmap(bm);
@@ -176,16 +183,10 @@ public class UserDetailFragment extends Fragment {
 		super.onResume();
 
 		// Restore the values of the checkbox
-		if (user.isActive() == Boolean.TRUE) {
-			isActiveView.setChecked(prefs.getBoolean("isActive", Boolean.TRUE));
-		} else {
-			isActiveView.setChecked(prefs.getBoolean("isActive", Boolean.FALSE));
-		}
+		boolean isActive = prefs.getBoolean("isActive", Boolean.TRUE);
+		Log.e("ACTIVE", Boolean.toString(isActive));
+		isActiveView.setChecked(isActive);
 	}
 
-	private void storeInputChanges() {
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putBoolean("isActive", user.isActive());
-		editor.commit();
-	}
+
 }

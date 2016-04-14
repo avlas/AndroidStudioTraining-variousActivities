@@ -15,10 +15,10 @@ import android.view.MenuItem;
  * vertical panes.
  * <p>
  * The activity makes heavy use of fragments. The list of items is a
- * {@link UserListFragment} and the item details (if present) is a
+ * {@link UsersFragment} and the item details (if present) is a
  * {@link UserDetailFragment}.
  * <p>
- * This activity also implements the required {@link UserListFragment.Callbacks}
+ * This activity also implements the required {@link UsersFragment.Callbacks}
  * interface to listen for item selections.
  */
 public class UsersActivity extends Activity implements UsersFragment.Callbacks {
@@ -36,8 +36,6 @@ public class UsersActivity extends Activity implements UsersFragment.Callbacks {
 		if (findViewById(R.id.userDetailFragment) != null) {
 			mTwoPane = true;
 
-			// In two-pane mode, list items should be given the 'activated'
-			// state when touched.
 			UsersFragment usersFragment = (UsersFragment) getFragmentManager().findFragmentById(R.id.usersFragment);
 			usersFragment.setActivateOnItemClick(true);			
 		}
