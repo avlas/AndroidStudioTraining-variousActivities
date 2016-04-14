@@ -4,6 +4,7 @@ package com.formation.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.formation.data.AnimalContract.Animals;
 
 public class AnimalDbHelper extends SQLiteOpenHelper {

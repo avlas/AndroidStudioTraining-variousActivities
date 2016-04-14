@@ -11,16 +11,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 import com.formation.data.AnimalContract.Animals;
 
 public class AnimalDetailActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
-    private long uiAnimalId;
-    private long animalId;
     String animalDiet;
     String animalFamily;
     String animalName;
     String animalSex;
     int animalAge;
+    private long uiAnimalId;
+    private long animalId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class AnimalDetailActivity extends Activity implements LoaderManager.Load
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        Uri singleRowUri = ContentUris.withAppendedId(Uri.parse(Animals.SCHEME + Animals.AUTHORITY + Animals.SEPARATOR +  Animals.TABLE_NAME), uiAnimalId);
-        return new CursorLoader(this, singleRowUri,  null, null, null, null);
+        Uri singleRowUri = ContentUris.withAppendedId(Uri.parse(Animals.SCHEME + Animals.AUTHORITY + Animals.SEPARATOR + Animals.TABLE_NAME), uiAnimalId);
+        return new CursorLoader(this, singleRowUri, null, null, null, null);
     }
 
     @Override

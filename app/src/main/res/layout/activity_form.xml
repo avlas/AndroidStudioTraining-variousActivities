@@ -3,7 +3,7 @@
     android:id="@+id/sv_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.formation.activities.FormActivity" >
+    tools:context="com.formation.activities.FormActivity">
 
     <LinearLayout
         android:id="@+id/ll_form"
@@ -13,7 +13,7 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <ImageView
             android:id="@+id/imageView_logo"
@@ -25,7 +25,7 @@
             android:id="@+id/radioGroup_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked" >
+            android:onClick="onRadioButtonClicked">
 
             <RadioButton
                 android:id="@+id/radioBtn_male"
@@ -33,16 +33,14 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"
-                android:text="@string/radio_male" >
-            </RadioButton>
+                android:text="@string/radio_male"></RadioButton>
 
             <RadioButton
                 android:id="@+id/radioBtn_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onRadioButtonClicked"
-                android:text="@string/radio_female" >
-            </RadioButton>
+                android:text="@string/radio_female"></RadioButton>
         </RadioGroup>
 
         <EditText

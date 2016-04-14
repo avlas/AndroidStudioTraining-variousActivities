@@ -4,7 +4,8 @@ import android.provider.BaseColumns;
 
 public final class AnimalContract {
 
-    private AnimalContract() {}
+    private AnimalContract() {
+    }
 
     public static abstract class Animals implements BaseColumns {
         public static final String SCHEME = "content://";

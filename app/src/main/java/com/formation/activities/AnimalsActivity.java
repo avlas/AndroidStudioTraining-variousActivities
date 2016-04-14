@@ -12,25 +12,23 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.formation.data.AnimalContract;
 import com.formation.data.AnimalContract.Animals;
 
 public class AnimalsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    SimpleCursorAdapter mAdapter;
-
     // These are the Contacts rows that we will retrieve
-    static final String[] PROJECTION = new String[] { Animals._ID, Animals.COLUMN_NAME_NAME };
-
+    static final String[] PROJECTION = new String[]{Animals._ID, Animals.COLUMN_NAME_NAME};
     // This is the select criteria
     static final String SELECTION = "((" + Animals.COLUMN_NAME_NAME + " NOTNULL) AND ("
             + Animals.COLUMN_NAME_NAME + " != '' ))";
+    SimpleCursorAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String[] fromColumns = { Animals.COLUMN_NAME_NAME };
-        int[] toViews = { android.R.id.text1 };
+        String[] fromColumns = {Animals.COLUMN_NAME_NAME};
+        int[] toViews = {android.R.id.text1};
 
         mAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, fromColumns, toViews, 0);
         setListAdapter(mAdapter);
@@ -49,7 +47,7 @@ public class AnimalsActivity extends ListActivity implements LoaderManager.Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, Uri.parse(Animals.SCHEME + Animals.AUTHORITY + Animals.SEPARATOR +  Animals.TABLE_NAME), PROJECTION, SELECTION, null, null);
+        return new CursorLoader(this, Uri.parse(Animals.SCHEME + Animals.AUTHORITY + Animals.SEPARATOR + Animals.TABLE_NAME), PROJECTION, SELECTION, null, null);
     }
 
     @Override

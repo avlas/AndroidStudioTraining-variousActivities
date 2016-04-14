@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.formation.activities.UsersActivity" >
+    tools:context="com.formation.activities.UsersActivity">
 
     <fragment
         android:id="@+id/usersFragment"

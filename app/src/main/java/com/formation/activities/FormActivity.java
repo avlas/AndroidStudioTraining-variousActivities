@@ -10,41 +10,41 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class FormActivity extends Activity {
-	RadioGroup sexRadioGroup;
+    RadioGroup sexRadioGroup;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_form);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_form);
 
-		ImageView logo = (ImageView) findViewById(R.id.imageView_logo);
-		logo.setImageResource(R.drawable.nature);
-	}
+        ImageView logo = (ImageView) findViewById(R.id.imageView_logo);
+        logo.setImageResource(R.drawable.nature);
+    }
 
-	public void onRadioButtonClicked(View view) {
-		sexRadioGroup = (RadioGroup) findViewById(R.id.radioGroup_sex);
-		int selectedIdRadioBtn = sexRadioGroup.getCheckedRadioButtonId();
-		RadioButton sexRadioBtn = (RadioButton) findViewById(selectedIdRadioBtn);
-	}
+    public void onRadioButtonClicked(View view) {
+        sexRadioGroup = (RadioGroup) findViewById(R.id.radioGroup_sex);
+        int selectedIdRadioBtn = sexRadioGroup.getCheckedRadioButtonId();
+        RadioButton sexRadioBtn = (RadioButton) findViewById(selectedIdRadioBtn);
+    }
 
-	protected void onPause() {
-		super.onPause();
-		setContentView(R.layout.activity_form);
-	}
+    protected void onPause() {
+        super.onPause();
+        setContentView(R.layout.activity_form);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.form, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.form, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

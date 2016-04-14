@@ -11,17 +11,18 @@ import android.support.annotation.NonNull;
 import com.formation.data.AnimalContract.Animals;
 
 public class AnimalProvider extends ContentProvider {
-    SQLiteDatabase db;
-    AnimalDbHelper dbHelper;
-    Cursor result;
-
     private static final int ANIMALS_LIST = 0;
     private static final int ANIMAL_DETAILS = 1;
     private static final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
+
     static {
         matcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME, ANIMALS_LIST);
         matcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME + "/#", ANIMAL_DETAILS);
     }
+
+    SQLiteDatabase db;
+    AnimalDbHelper dbHelper;
+    Cursor result;
 
     public AnimalProvider() {
     }
@@ -77,7 +78,7 @@ public class AnimalProvider extends ContentProvider {
                 break;
             }
             case ANIMAL_DETAILS: {
-                String[] id = { uri.getLastPathSegment() };
+                String[] id = {uri.getLastPathSegment()};
                 result = dbHelper.getReadableDatabase().query(Animals.TABLE_NAME, projection, "_ID = ?", id, null, null, sortOrder);
                 break;
             }
@@ -107,7 +108,6 @@ public class AnimalProvider extends ContentProvider {
         // at the given URI.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
 
 
     @Override
