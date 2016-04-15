@@ -25,9 +25,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_list);
 
-		/*Intent animalIntentService = new Intent(MainActivity.this, AnimalIntentService.class);
-        startService(animalIntentService);*/
-
         initDrawerList();
 
         title = getTitle();
@@ -50,6 +47,7 @@ public class MainActivity extends Activity {
         drawerTitles.add(getString(R.string.users));
         drawerTitles.add(getString(R.string.contacts));
         drawerTitles.add(getString(R.string.animals));
+        drawerTitles.add(getString(R.string.google_maps));
         drawerTitles.add(getString(R.string.preferences));
     }
 
@@ -60,31 +58,34 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
+        Intent intent = null;
         switch (position) {
             case 0:
-                Intent mirrorTextActivity = new Intent(MainActivity.this, MirrorTextActivity.class);
-                startActivity(mirrorTextActivity);
+                intent = new Intent(MainActivity.this, MirrorTextActivity.class);
                 break;
             case 1:
-                Intent formActivity = new Intent(MainActivity.this, FormActivity.class);
-                startActivity(formActivity);
+                intent = new Intent(MainActivity.this, FormActivity.class);
                 break;
             case 2:
-                Intent usersActivity = new Intent(MainActivity.this, UsersActivity.class);
-                startActivity(usersActivity);
+                intent = new Intent(MainActivity.this, UsersActivity.class);
                 break;
             case 3:
-                Intent contactsActivity = new Intent(MainActivity.this, ContactsActivity.class);
-                startActivity(contactsActivity);
+                intent = new Intent(MainActivity.this, ContactsActivity.class);
                 break;
             case 4:
-                Intent animalsActivity = new Intent(MainActivity.this, AnimalsActivity.class);
-                startActivity(animalsActivity);
+                Intent animalIntentService = new Intent(MainActivity.this, AnimalsIntentService.class);
+                startService(animalIntentService);
+
+                intent = new Intent(MainActivity.this, AnimalsActivity.class);
                 break;
             case 5:
-                Intent myPrefs = new Intent(MainActivity.this, PreferencesActivity.class);
-                startActivity(myPrefs);
+                intent = new Intent(MainActivity.this, GoogleMapsActivity.class);
+                break;
+            case 6:
+                intent = new Intent(MainActivity.this, PreferencesActivity.class);
+                break;
         }
+        startActivity(intent);
 
         // Highlight the selected item, update the title, and close the drawer
         drawerList.setItemChecked(position, true);

@@ -1,28 +1,29 @@
 package com.formation.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.formation.data.AnimalContract.Animals;
 
 public class AnimalProvider extends ContentProvider {
-    private static final int ANIMALS_LIST = 0;
-    private static final int ANIMAL_DETAILS = 1;
-    private static final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 
+    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private SQLiteDatabase db;
+    private AnimalDbHelper dbHelper;
+    private Cursor result;
+
+    private static final int ANIMALS = 0;
+    private static final int ANIMAL = 1;
     static {
-        matcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME, ANIMALS_LIST);
-        matcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME + "/#", ANIMAL_DETAILS);
+        uriMatcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME, ANIMALS);
+        uriMatcher.addURI(Animals.AUTHORITY, Animals.TABLE_NAME + "/#", ANIMAL);
     }
-
-    SQLiteDatabase db;
-    AnimalDbHelper dbHelper;
-    Cursor result;
 
     public AnimalProvider() {
     }
@@ -30,54 +31,19 @@ public class AnimalProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         dbHelper = new AnimalDbHelper(getContext());
-        db = dbHelper.getWritableDatabase();
-
-        ContentValues lion = buildLion();
-        ContentValues giraffe = buildGiraffe();
-
-        db.beginTransaction();
-        try {
-            db.insert(Animals.TABLE_NAME, null, lion);
-            db.insert(Animals.TABLE_NAME, null, giraffe);
-            db.setTransactionSuccessful(); // commit
-        } finally {
-            db.endTransaction(); // rollback
-        }
         return false;
-    }
-
-    @NonNull
-    private ContentValues buildLion() {
-        ContentValues animal = new ContentValues();
-        animal.put(Animals.COLUMN_NAME_DIET, "carnivore");
-        animal.put(Animals.COLUMN_NAME_FAMILY, "lion");
-        animal.put(Animals.COLUMN_NAME_NAME, "Mara");
-        animal.put(Animals.COLUMN_NAME_SEX, "F");
-        animal.put(Animals.COLUMN_NAME_AGE, 2);
-        return animal;
-    }
-
-    @NonNull
-    private ContentValues buildGiraffe() {
-        ContentValues animal = new ContentValues();
-        animal.put(Animals.COLUMN_NAME_DIET, "herbivore");
-        animal.put(Animals.COLUMN_NAME_FAMILY, "giraffe");
-        animal.put(Animals.COLUMN_NAME_NAME, "Gigi");
-        animal.put(Animals.COLUMN_NAME_SEX, "M");
-        animal.put(Animals.COLUMN_NAME_AGE, 5);
-        return animal;
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        int uriType = matcher.match(uri);
+        int uriType = uriMatcher.match(uri);
         switch (uriType) {
-            case ANIMALS_LIST: {
+            case ANIMALS: {
                 result = dbHelper.getReadableDatabase().query(Animals.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             }
-            case ANIMAL_DETAILS: {
+            case ANIMAL: {
                 String[] id = {uri.getLastPathSegment()};
                 result = dbHelper.getReadableDatabase().query(Animals.TABLE_NAME, projection, "_ID = ?", id, null, null, sortOrder);
                 break;
@@ -92,13 +58,57 @@ public class AnimalProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        // TODO: Implement this to handle requests to insert a new row.
-        throw new UnsupportedOperationException("Not yet implemented");
+        db = dbHelper.getWritableDatabase();
+
+        db.beginTransaction();
+
+        long rowID = 0;
+        try {
+            rowID = db.insert(Animals.TABLE_NAME, null, values);
+            db.setTransactionSuccessful(); // commit
+        } finally {
+            db.endTransaction(); // rollback
+        }
+
+        Uri _uri = null;
+        if (rowID > 0) {
+            _uri = ContentUris.withAppendedId(AnimalContract.Animals.CONTENT_URI, rowID);
+            getContext().getContentResolver().notifyChange(_uri, null);
+            Log.e("URI",_uri.toString());
+        }
+        return _uri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        // Implement this to handle requests to delete one or more rows.
+/*        int count = 0;
+        switch (uriMatcher.match(uri)) {
+            case ANIMAL:
+                count = db.delete(Animals.TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return count;*/
+
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public int update(Uri uri, ContentValues values, String selection,
+                      String[] selectionArgs) {
+/*        int count = 0;
+        switch (uriMatcher.match(uri)) {
+            case ANIMAL:
+                count = db.update(Animals.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return count;*/
+        // TODO: Implement this to handle requests to update one or more rows.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -109,11 +119,4 @@ public class AnimalProvider extends ContentProvider {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-
-    @Override
-    public int update(Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
-        // TODO: Implement this to handle requests to update one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
 }

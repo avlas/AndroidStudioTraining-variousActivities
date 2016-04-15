@@ -17,19 +17,21 @@ import android.widget.SimpleCursorAdapter;
 
 public class ContactsActivity extends ListActivity implements LoaderCallbacks<Cursor> {
 
-    // These are the Contacts rows that we will retrieve
-    static final String[] PROJECTION = new String[]{ContactsContract.Data._ID, ContactsContract.Data.DISPLAY_NAME};
-    // This is the select criteria
-    static final String SELECTION = "((" + ContactsContract.Data.DISPLAY_NAME + " NOTNULL) AND ("
-            + ContactsContract.Data.DISPLAY_NAME + " != '' ))";
+    SimpleCursorAdapter mAdapter;
+
     // Contacts Permissions
     private static final int REQUEST_CONTACTS = 1;
-    private static String[] PERMISSIONS_CONTACTS = {Manifest.permission.READ_CONTACTS};
-    SimpleCursorAdapter mAdapter;
+    private static String[] PERMISSIONS_CONTACTS = { Manifest.permission.READ_CONTACTS };
+
+    static final String[] PROJECTION = new String[]{ContactsContract.Data._ID, ContactsContract.Data.DISPLAY_NAME};
+
+    static final String SELECTION = "((" + ContactsContract.Data.DISPLAY_NAME + " NOTNULL) AND ("
+            + ContactsContract.Data.DISPLAY_NAME + " != '' ))";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // pas besoin de xml car ListActivity vient avec sa listView
         // setContentView(R.layout.activity_contacts);
 
         verifyContactsPermissions();
@@ -78,15 +80,15 @@ public class ContactsActivity extends ListActivity implements LoaderCallbacks<Cu
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        data.moveToFirst();
-        while (!data.isAfterLast()) {
-            long itemId = data.getLong(data.getColumnIndexOrThrow(ContactsContract.Data._ID));
-            String displayName = data.getString(data.getColumnIndexOrThrow(ContactsContract.Data.DISPLAY_NAME));
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(ContactsContract.Data._ID));
+            String displayName = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Data.DISPLAY_NAME));
             //Log.e("contact", itemId + " " + displayName);
-            data.moveToNext();
+            cursor.moveToNext();
         }
-        mAdapter.swapCursor(data);
+        mAdapter.swapCursor(cursor);
     }
 
     @Override

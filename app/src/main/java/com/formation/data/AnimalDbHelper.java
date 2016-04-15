@@ -14,6 +14,7 @@ public class AnimalDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ANIMALS =
             "CREATE TABLE " + Animals.TABLE_NAME + " (" +
                     Animals._ID + " INTEGER PRIMARY KEY," +
+                    Animals.COLUMN_NAME_ANIMAL_ID + " INTEGER," +
                     Animals.COLUMN_NAME_DIET + " TEXT," +
                     Animals.COLUMN_NAME_FAMILY + " TEXT," +
                     Animals.COLUMN_NAME_NAME + " TEXT," +

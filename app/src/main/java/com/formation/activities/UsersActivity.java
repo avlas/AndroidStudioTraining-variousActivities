@@ -72,5 +72,4 @@ public class UsersActivity extends Activity implements UsersFragment.Callbacks {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
