@@ -9,27 +9,30 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class FormActivity extends Activity {
-    RadioGroup sexRadioGroup;
+    @Bind(R.id.imageView_logo) ImageView logo;
+    @Bind(R.id.radioGroup_sex) RadioGroup sexRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-        ImageView logo = (ImageView) findViewById(R.id.imageView_logo);
+        ButterKnife.bind(this);
+
         logo.setImageResource(R.drawable.nature);
     }
 
     public void onRadioButtonClicked(View view) {
-        sexRadioGroup = (RadioGroup) findViewById(R.id.radioGroup_sex);
         int selectedIdRadioBtn = sexRadioGroup.getCheckedRadioButtonId();
         RadioButton sexRadioBtn = (RadioButton) findViewById(selectedIdRadioBtn);
     }
 
     protected void onPause() {
         super.onPause();
-        setContentView(R.layout.activity_form);
     }
 
     @Override

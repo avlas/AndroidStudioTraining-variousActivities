@@ -65,7 +65,6 @@ public class MirrorTextActivity extends Activity {
 
     protected void onPause() {
         super.onPause();
-        setContentView(R.layout.activity_mirror_text);
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("toReverse", toReverseView.getText().toString());

@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- MainActivity -->
-    <string name="app_name">Various Activities Using Fragments</string>
+    <string name="app_name">Various Activities</string>
     <string name="hello_world">Hello world!</string>
     <string name="mirror_text">MirrorText</string>
     <string name="form">Form</string>

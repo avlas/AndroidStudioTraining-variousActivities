@@ -2,15 +2,17 @@ package com.formation.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
-    public String id;
-    private int photo;
-    private String firstName;
-    private String lastName;
-    private boolean isActive;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public User() {
-    }
+@NoArgsConstructor
+public class User implements Serializable {
+    @Getter @Setter public String id;
+    @Getter @Setter private int photo;
+    @Getter @Setter private String firstName;
+    @Getter @Setter private String lastName;
+    @Getter @Setter private boolean isActive;
 
     public User(String id, String firstName, String lastName, int photo) {
         super();
@@ -19,38 +21,6 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.photo = photo;
         this.isActive = false;
-    }
-
-    public int getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(int photo) {
-        this.photo = photo;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
     }
 
     @Override

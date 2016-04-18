@@ -14,10 +14,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends Activity {
+    @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @Bind(R.id.left_drawer) ListView drawerList;
     private List<String> drawerTitles;
-    private DrawerLayout drawerLayout;
-    private ListView drawerList;
     private CharSequence title;
 
     @Override
@@ -25,11 +28,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_list);
 
+        ButterKnife.bind(this);
+
         initDrawerList();
 
         title = getTitle();
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
 
         drawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_item, drawerTitles));
         drawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -95,7 +98,6 @@ public class MainActivity extends Activity {
 
     protected void onPause() {
         super.onPause();
-        setContentView(R.layout.activity_drawer_list);
     }
 
     @Override

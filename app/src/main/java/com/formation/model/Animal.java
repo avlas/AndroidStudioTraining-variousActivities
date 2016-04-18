@@ -2,16 +2,18 @@ package com.formation.model;
 
 import java.io.Serializable;
 
-public class Animal implements Serializable {
-    public long id;
-    private String diet;
-    private String family;
-    private String name;
-    private String sex;
-    private int age;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public Animal() {
-    }
+@NoArgsConstructor
+public class Animal implements Serializable {
+    @Getter @Setter public long id;
+    @Getter @Setter private String diet;
+    @Getter @Setter private String family;
+    @Getter @Setter private String name;
+    @Getter @Setter private String sex;
+    @Getter @Setter private int age;
 
     public Animal(long id, String diet, String family, String name, String sex, int age) {
         super();
@@ -20,54 +22,6 @@ public class Animal implements Serializable {
         this.family = family;
         this.name = name;
         this.sex = sex;
-        this.age = age;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDiet() {
-        return diet;
-    }
-
-    public void setDiet(String diet) {
-        this.diet = diet;
-    }
-
-    public String getFamily() {
-        return family;
-    }
-
-    public void setFamily(String family) {
-        this.family = family;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
         this.age = age;
     }
 

@@ -82,7 +82,6 @@ public class AnimalDetailActivity extends Activity implements LoaderManager.Load
 
     protected void onPause() {
         super.onPause();
-        setContentView(R.layout.activity_animal_detail);
     }
 
     @Override
