@@ -82,7 +82,7 @@ public class AnimalsIntentService extends IntentService {
                             contentValues.put(AnimalContract.Animals.COLUMN_NAME_AGE, Integer.toString(animal.getAge()));
 
                             uri = getContentResolver().insert(uri, contentValues);
-                            Toast.makeText(getBaseContext(), "New record inserted : " + uri.toString(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getBaseContext(), "New record inserted : " + uri.toString(), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Log.w(TAG,"No response !!");

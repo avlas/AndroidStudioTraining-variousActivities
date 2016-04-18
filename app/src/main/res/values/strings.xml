@@ -17,6 +17,8 @@
     <string name="google_maps">Google Maps</string>
     <string name="preferences">Preferences</string>
 
+    <!-- DrawerFragment -->
+    <string name="title_activity_drawer_fragment">DrawerFragment</string>
 
     <!-- MirrorTextActivity -->
     <string name="title_activity_mirror_text">MirrorText</string>
